@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>gu-gu-monster-tv</title>
+  <script src="./lib/socket.io.min.js"></script>
+</head>
+<body>
+  <p id="isMove"></p>
+  <p id="ratio"></p>
+  <img id="src" width="300" />
+  <img id="dist" width="300" />
+  <script>
+    const socket = io.connect();
+
+    socket.on('video', ({ dataURL, isMove, ratio }) => {
+      document.getElementById('src').src = dataURL.src;
+      document.getElementById('dist').src = dataURL.dist;
+      document.getElementById('isMove').innerText = `${ isMove }`;
+      document.getElementById('ratio').innerText = `${ ratio * 100 }%`;
+    });
+  </script>
+</body>
+</html>
