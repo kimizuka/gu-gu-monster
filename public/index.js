@@ -25,23 +25,28 @@ function successCallback(stream) {
   const orderVoice = {
     red: new Howl({
       src: ['/mp3/red.mp3'],
-      volume: 2
+      volume: 2,
+      onend: onEndVoice
     }),
     blue: new Howl({
       src: ['/mp3/blue.mp3'],
       volume: 2,
+      onend: onEndVoice
     }),
     green: new Howl({
       src: ['/mp3/green.mp3'],
       volume: 2,
+      onend: onEndVoice
     }),
     yellow: new Howl({
       src: ['/mp3/yellow.mp3'],
       volume: 2,
+      onend: onEndVoice
     })
   };
   let inRange = null;
   let isMove = false;
+  let canPlayVoice = false;
   let currentColorIndex = 0;
   let ratio = 0;
 
@@ -98,7 +103,11 @@ function successCallback(stream) {
 
     if (currentColorIndex) {
       if (isMove && ggm.getColorMats(colors[currentColorIndex])[0].limitRatio < ratio) {
-        if (!ok.playing()) {
+        if (
+          canPlayVoice &&
+          !ok.playing()
+        ) {
+          canPlayVoice = false;
           ok.play();
         }
       }
@@ -114,6 +123,10 @@ function successCallback(stream) {
 
     inRange.setMatList(ggm.getColorMats(colors[currentColorIndex]));
     orderVoice[colors[currentColorIndex]].play();
+  }
+  
+  function onEndVoice() {
+    canPlayVoice = true;
   }
 }
 
