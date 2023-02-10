@@ -49,6 +49,7 @@ function successCallback(stream) {
       onend: onEndVoice
     })
   };
+  const noTimerDelay = 500;
   let inRange = null;
   let isMove = false;
   let canPlayVoice = false;
@@ -100,7 +101,7 @@ function successCallback(stream) {
     if (!ok.playing()) {
       isMove = true;
       clearTimeout(ngTimer);
-      ngTimer = setTimeout(() => orderVoice[colors[currentColorIndex]].play(), 500);
+      ngTimer = setTimeout(() => orderVoice[colors[currentColorIndex]].play(), noTimerDelay);
     }
   }
 
