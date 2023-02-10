@@ -54,6 +54,7 @@ function successCallback(stream) {
   let canPlayVoice = false;
   let currentColorIndex = 0;
   let ratio = 0;
+  let ngTimer = -1;
 
   video.oncanplay = () => {
     const button = document.querySelector('button');
@@ -96,7 +97,11 @@ function successCallback(stream) {
   video.srcObject = stream;
 
   function onMove() {
-    isMove = true;
+    if (!ok.playing()) {
+      isMove = true;
+      clearTimeout(ngTimer);
+      ngTimer = setTimeout(() => orderVoice[colors[currentColorIndex]].play(), 500);
+    }
   }
 
   function onStop() {
@@ -112,6 +117,7 @@ function successCallback(stream) {
           canPlayVoice &&
           !ok.playing()
         ) {
+          clearTimeout(ngTimer);
           canPlayVoice = false;
           ok.play();
         }
@@ -129,7 +135,7 @@ function successCallback(stream) {
     inRange.setMatList(ggm.getColorMats(colors[currentColorIndex]));
     orderVoice[colors[currentColorIndex]].play();
   }
-  
+
   function onEndVoice() {
     canPlayVoice = true;
   }
