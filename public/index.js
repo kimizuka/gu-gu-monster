@@ -20,32 +20,32 @@ function successCallback(stream) {
   const ok = new Howl({
     src: ['/mp3/ok.mp3'],
     html5: true,
-    volume: 2,
+    volume: 1,
     onend: () => setTimeout(() => selectColor(), 1000)
   });
   const orderVoice = {
     red: new Howl({
       src: ['/mp3/red.mp3'],
       html5: true,
-      volume: 2,
+      volume: 1,
       onend: onEndVoice
     }),
     blue: new Howl({
       src: ['/mp3/blue.mp3'],
       html5: true,
-      volume: 2,
+      volume: 1,
       onend: onEndVoice
     }),
     green: new Howl({
       src: ['/mp3/green.mp3'],
       html5: true,
-      volume: 2,
+      volume: 1,
       onend: onEndVoice
     }),
     yellow: new Howl({
       src: ['/mp3/yellow.mp3'],
       html5: true,
-      volume: 2,
+      volume: 1,
       onend: onEndVoice
     })
   };
